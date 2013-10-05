@@ -1,0 +1,65 @@
+#ifndef NUMBINARIO_H_INCLUDED
+#define NUMBINARIO_H_INCLUDED
+
+class numBinario
+{
+private:
+
+public:
+    int numero[8];
+    numBinario();
+    numBinario(int a[8]);
+    void setNumeroBinario(int a[8]);
+    void getNumeroBinario(int numero[8]);
+    numBinario decToBinary(int nueva);
+    void muestra(int a);
+};
+numBinario::numBinario()
+{
+     for(int b = 0; b < 8; b++)
+        numero[b] = 0;
+}
+void numBinario::muestra(int a)
+{
+    for(int b = 7; b > (7-a); b--)
+       cout<< numero[b];
+}
+numBinario::numBinario(int a[8])
+{
+    for(int b = 0; b < 8; b++)
+        numero[b] = a[b];
+}
+void numBinario::setNumeroBinario(int a[8])
+{
+     for(int b = 0; b < 8; b++)
+        numero[b] = a[b];
+}
+void numBinario::getNumeroBinario(int numera[8])
+{
+    for(int a = 0; a<8; a++)
+         numera[a] = this->numero[a];
+}
+numBinario numBinario::decToBinary(int nueva)
+{
+    int cosiente, residuo, contC = 7, temp[8];
+     do{
+            cosiente=nueva/2;
+            residuo=nueva%2;
+            temp[contC]=residuo;
+            nueva=cosiente;
+            contC--;
+    }while(cosiente>=2);
+
+    temp[contC] = cosiente;
+    contC--;
+
+    while(contC>=0)
+    {
+        temp[contC]=0;
+        contC--;
+    }
+    numBinario nuevo;
+    nuevo.setNumeroBinario(temp);
+    return nuevo;
+}
+#endif // NUMBINARIO_H_INCLUDED
