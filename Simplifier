@@ -1,0 +1,151 @@
+#ifndef BINARIO_H_INCLUDED
+#define BINARIO_H_INCLUDED
+#include "numBinario.h"
+
+class Binario
+{
+private:
+    int marca, numeroD, nVariables;
+
+public:
+    numBinario numeroB;
+    Binario();
+    Binario(int nueva, int variables);
+    void setBinario(int nueva, int nVariables);
+    void setMarca(int marca){this->marca = marca;}
+    void setNumeroD(int deci){numeroD = deci;}
+    void setNumeroB(numBinario nuevo);
+    int getMarca(){return marca;}
+    int getNumeroD(){return numeroD;}
+    numBinario getNumeroB(){return numeroB;}
+    int numeroUnos(int b[2], int c, int e);
+    Binario compara(Binario m[15], int c, int pos);
+    int numerosCeros(int b[10],int c);
+    void MarcaFinal(Binario m[16][16], int pos);
+};
+Binario::Binario()
+{
+    marca = 0;
+    numeroD = 0;
+    numBinario nuevo1;
+    numeroB = nuevo1;
+}
+Binario::Binario(int nueva, int variables)
+{
+    marca = 0;
+    numeroD = nueva;
+    nVariables = variables;
+    numBinario nuevo, nuevo1;
+    nuevo1 = nuevo.decToBinary(nueva);
+    numeroB = nuevo1;
+}
+void Binario::setBinario(int nueva, int nVariables)
+{
+    marca = 0;
+    numeroD = nueva;
+    this->nVariables = nVariables;
+    numBinario nuevo, nuevo1;
+    nuevo1 = nuevo.decToBinary(nueva);
+    numeroB = nuevo1;
+}
+void Binario::setNumeroB(numBinario nuevo)
+{
+    numeroB = nuevo;
+}
+int Binario::numeroUnos(int b[10],int c, int e)//1 posicion =
+{
+    int encontrado=0, posicion = 0;
+    e = 0;
+    for(int d = 7; d > (7-c); d--)
+       {
+           if(numeroB.numero[d] == 1)
+           {
+               encontrado = 1;
+           }
+            if(encontrado == 1)
+            {
+                b[posicion] = d;
+                posicion++;
+                e++;
+            }
+            encontrado = 0;
+       }
+        if(encontrado == 0)
+            b[0]= -1;
+        return e;
+
+}
+Binario Binario::compara(Binario m[16], int c, int pos)
+{
+    int cont = 0, diferente = 0;
+    Binario nuevo, malo;
+    numBinario nuevo1, nuevo2;
+
+     for(int d = 7; d > (7-c); d--)
+    {
+        if(this->numeroB.numero[d] ==  m[pos].numeroB.numero[d])
+        {
+            cont++;
+        }
+        else
+            diferente = d;
+    }
+    if (cont == c-1)
+    {
+        nuevo = m[pos];
+        nuevo.numeroB.numero[diferente] = 2;
+        nuevo.setMarca(1);
+
+    }
+   else
+    {
+        nuevo.numeroD = -1;
+
+    }
+    return nuevo;
+}
+int Binario::numerosCeros(int b[10],int c)//1 posicion =
+{
+    int e;
+    int encontrado=0, posicion = 0;
+    e = 0;
+    for(int d = 7; d > (7-c); d--)
+       {
+           if(numeroB.numero[d] == 0)
+           {
+               encontrado = 1;
+           }
+            if(encontrado == 1)
+            {
+                b[posicion] = d;
+                posicion++;
+                e++;
+            }
+       }
+        if(encontrado == 0)
+            b[0] = -1;
+        encontrado = 0;
+        return e;
+
+}
+void Binario::MarcaFinal(Binario m[][16], int pos)
+{
+    int diferente = 0, cont = 0;
+    Binario nuevo;
+    for( int a = 1; a< 16; a++)
+    {
+        for(int d = 7; d > (7-3); d--)
+    {
+        if(this->numeroB.numero[d] ==  m[0][a].numeroB.numero[d] || this->numeroB.numero[d]  ==  2)
+        {
+            cont++;
+        }
+    }
+    if(cont == 3 )
+    {
+        m[pos][a].setMarca(1);
+    }
+    }
+
+}
+#endif // BINARIO_H_INCLUDED
